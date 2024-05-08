@@ -1,8 +1,7 @@
 export interface UserAuthDto {
-  token: string,
-  user: {
-    id: string,
-    username: string,
-  },
-  expiresAt: Date;
+  _id: string,
+  username: string,
+  email: string,
+  admin: boolean,
+  videos: string[],
 }

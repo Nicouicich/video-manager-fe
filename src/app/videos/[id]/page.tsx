@@ -1,11 +1,12 @@
 'use client';
 import { getVideoById } from "@/api/videos/[id]/video";
 import { VideoDto } from "@/dto/videos/video";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function VideosPage({ params }: any) {
   const [video, setVideo] = useState<VideoDto | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchVideo = async () => {
       const token = localStorage.getItem('jwt');
@@ -13,7 +14,7 @@ export default function VideosPage({ params }: any) {
         const video2 = await getVideoById(params.id, token);
         setVideo(video2);
       } else {
-        window.location.href = '/';
+        router.push('/');
       }
     };
 
