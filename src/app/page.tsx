@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
-      style={{ backgroundImage: `url('/home-background.gif')`, backgroundSize: '100% 80%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      style={{ backgroundImage: `url(${process.env.AWS_CDN_URL}home-background.gif)`, backgroundSize: '100% 80%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
