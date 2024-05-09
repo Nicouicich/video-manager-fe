@@ -4,6 +4,7 @@ import { IVideo } from "@interfaces/videos/video";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
+export const runtime = 'edge';
 export default function VideosPage({ params }: any) {
   const [video, setVideo] = useState<IVideo | null>(null);
   const router = useRouter();
