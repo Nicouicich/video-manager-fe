@@ -1,7 +1,7 @@
-import { LoginResponseDto } from "@/dto/auth/login-response.dto";
+import { ILoginResponse } from "@interfaces/auth/login-response";
 import { redirect } from "next/navigation";
 
-export async function handleLogin(username: string, password: string): Promise<LoginResponseDto> {
+export async function handleLogin(username: string, password: string): Promise<ILoginResponse> {
   const response: Response = await fetch('http://localhost:3000/api/auth/login', {
     method: 'POST',
     headers: {

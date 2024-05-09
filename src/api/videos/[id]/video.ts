@@ -1,6 +1,6 @@
-import { VideoDto } from "@/dto/videos/video";
+import { IVideo } from "@interfaces/videos/video";
 
-export async function getVideoById(id: string, token: string): Promise<VideoDto | null> {
+export async function getVideoById(id: string, token: string): Promise<IVideo | null> {
     const response = await fetch(`http://localhost:3000/api/video/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`

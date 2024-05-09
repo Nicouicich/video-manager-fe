@@ -1,5 +1,5 @@
 
-export interface UserVideoDto {
+export interface IUserVideo {
   id: string;
   username: string;
 }

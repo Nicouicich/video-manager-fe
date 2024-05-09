@@ -1,21 +1,21 @@
-import { UserAuthDto } from '@/dto/auth/auth-user.dto';
-import { VideoDto } from '@/dto/videos/video';
 import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { deleteVideoById } from '@/api/videos/[id]/video';
+import { IVideo } from '@interfaces/videos/video';
+import { deleteVideoById } from '@api/videos/[id]/video';
+import { IUserAuth } from '@interfaces/auth/auth-user';
 
 interface SmallVideoProps {
-  video: VideoDto;
+  video: IVideo;
 }
 
 const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   const jwt = localStorage.getItem('jwt');
-  const user: UserAuthDto = jwtDecode(jwt as string);
+  const user: IUserAuth = jwtDecode(jwt as string);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 

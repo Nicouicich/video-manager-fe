@@ -13,9 +13,9 @@ const ProfileIcon: React.FC = () => {
     const getUsertoken = async () => {
       const token = localStorage.getItem('jwt');
       if (token) {
-        const decodedToken: any = jwtDecode(token);
-        setUserId(decodedToken._id);
-        const img = decodedToken.imageUrl ? decodedToken.imageUrl : imageUrl;
+        const decodeken: any = jwtDecode(token);
+        setUserId(decodeken._id);
+        const img = decodeken.imageUrl ? decodeken.imageUrl : imageUrl;
         setImageUrl(img);
       } else {
       }

@@ -1,5 +1,5 @@
 // RegisterForm.tsx
-import { handleRegister } from '@/api/register/register';
+import { handleRegister } from '@api/register/register';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState } from 'react';
 import GenericForm from '../GenericForm';
@@ -19,8 +19,8 @@ const RegisterForm: FC = () => {
     event.preventDefault();
 
     try {
-      const responseDto = await handleRegister(username, email, password);
-      localStorage.setItem('jwt', responseDto.token);
+      const response = await handleRegister(username, email, password);
+      localStorage.setItem('jwt', response.token);
       router.push('/videos');
     } catch (error: any) {
       setErrorMessage(error?.message);

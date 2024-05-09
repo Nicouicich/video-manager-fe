@@ -1,4 +1,4 @@
-export interface UserAuthDto {
+export interface IUserAuth {
   _id: string,
   username: string,
   email: string,

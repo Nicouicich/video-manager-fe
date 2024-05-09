@@ -1,21 +1,21 @@
 'use client';
 
-import { getAllVideos } from '@/api/videos/videos';
-import Navbar from '@/components/Navbar/Index';
-import SmallVideo from '@/components/videos/SmallVideo';
-import { VideoDto } from '@/dto/videos/video';
+import { getAllVideos } from '@api/videos/videos';
+import Navbar from '@components/Navbar/Index';
+import SmallVideo from '@components/videos/SmallVideo';
+import { IVideo } from '@interfaces/videos/video';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function VideosPage() {
-  const [videos, setVideos] = useState<VideoDto[]>([]);
+  const [videos, setVideos] = useState<IVideo[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     const fetchVideos = async () => {
       const token = localStorage.getItem('jwt');
       if (token) {
-        const videos: VideoDto[] = await getAllVideos(token);
+        const videos: IVideo[] = await getAllVideos(token);
         setVideos(videos);
       } else {
         router.push('/');
@@ -30,7 +30,7 @@ export default function VideosPage() {
       <Navbar />
       <div className="flex flex-wrap justify-center mt-4">
         {videos.length ? (
-          videos.map((video: VideoDto, index) => (
+          videos.map((video: IVideo, index) => (
             <SmallVideo key={video.title + index} video={video} />
           ))
         ) : (

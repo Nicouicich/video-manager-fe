@@ -8,7 +8,7 @@ interface PasswordInputProps {
 
 const PasswordInput: FC<PasswordInputProps> = ({ value, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [passworuched, setPassworuched] = useState(false);
 
   const togglePasswordVisibility = (event: MouseEvent) => {
     event.preventDefault();
@@ -27,7 +27,7 @@ const PasswordInput: FC<PasswordInputProps> = ({ value, onChange }) => {
           id='password'
           value={value}
           onChange={(e) => {
-            setPasswordTouched(true);
+            setPassworuched(true);
             onChange(e.target.value);
           }}
           className='w-full px-3 py-2 focus:outline-none'
@@ -44,7 +44,7 @@ const PasswordInput: FC<PasswordInputProps> = ({ value, onChange }) => {
           />
         </button>
       </div>
-      {passwordTouched && value.length < 8 && (
+      {passworuched && value.length < 8 && (
         <p className='text-red-500 mb-4 text-center'>Password must be at least 8 characters long</p>
       )}
     </div>

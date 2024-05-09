@@ -1,7 +1,7 @@
 // components/UploadButton.tsx
 'use client';
-import { uploadVideo } from '@/api/videos/videos';
-import React, { useEffect, useRef, useState } from 'react';
+import { uploadVideo } from '@api/videos/videos';
+import React, { useRef } from 'react';
 
 const UploadButton: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -13,7 +13,7 @@ const UploadButton: React.FC = () => {
   const handleFileChange = () => {
     if (fileInputRef.current?.files?.length) {
       const filesArray = Array.from(fileInputRef.current.files);
-      const jwt = localStorage.getItem('jwt'); // get the token from local storage
+      const jwt = localStorage.getItem('jwt'); 
       uploadVideo(filesArray, jwt);
     }
   };

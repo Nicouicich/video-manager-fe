@@ -1,11 +1,11 @@
 'use client';
-import { getVideoById } from "@/api/videos/[id]/video";
-import { VideoDto } from "@/dto/videos/video";
+import { getVideoById } from "@api/videos/[id]/video";
+import { IVideo } from "@interfaces/videos/video";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function VideosPage({ params }: any) {
-  const [video, setVideo] = useState<VideoDto | null>(null);
+  const [video, setVideo] = useState<IVideo | null>(null);
   const router = useRouter();
   useEffect(() => {
     const fetchVideo = async () => {

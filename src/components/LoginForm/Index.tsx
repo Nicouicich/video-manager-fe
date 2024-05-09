@@ -1,12 +1,11 @@
-import { handleLogin } from '@/api/login/login';
+import { handleLogin } from '@api/login/login';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState } from 'react';
 import GenericForm from '../GenericForm';
 import GoogleLoginButton from '../GoogleLoginButton/Index';
 import PasswordInput from '../Session/PasswordInput';
 import UsernameInput from '../Session/UsernameInput';
-import { UserAuthDto } from '@/dto/auth/auth-user.dto';
-import { LoginResponseDto } from '@/dto/auth/login-response.dto';
+import { ILoginResponse } from '@interfaces/auth/login-response';
 
 const LoginForm: FC = () => {
   const [username, setUsername] = useState<string>('');
@@ -18,8 +17,8 @@ const LoginForm: FC = () => {
     event.preventDefault();
 
     try {
-      const responseDto: LoginResponseDto = await handleLogin(username, password);
-      localStorage.setItem('jwt', responseDto.token);
+      const response: ILoginResponse = await handleLogin(username, password);
+      localStorage.setItem('jwt', response.token);
       router.push('/videos');
     } catch (error: any) {
       setErrorMessage(error.message);

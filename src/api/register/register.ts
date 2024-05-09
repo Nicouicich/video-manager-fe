@@ -1,6 +1,6 @@
-import { LoginResponseDto } from "@/dto/auth/login-response.dto";
+import { ILoginResponse } from "@interfaces/auth/login-response";
 
-export async function handleRegister(username: string, email: string, password: string): Promise<LoginResponseDto> {
+export async function handleRegister(username: string, email: string, password: string): Promise<ILoginResponse> {
   const response: Response = await fetch('http://localhost:3000/api/auth/register', {
     method: 'POST',
     headers: {

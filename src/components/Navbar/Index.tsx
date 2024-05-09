@@ -16,8 +16,8 @@ const Navbar: React.FC = () => {
     const getUsertoken = async () => {
       const token = localStorage.getItem('jwt');
       if (token) {
-        const decodedToken: any = jwtDecode(token);
-        setAdmin(decodedToken.admin);
+        const decodeken: any = jwtDecode(token);
+        setAdmin(decodeken.admin);
       }
     };
 
