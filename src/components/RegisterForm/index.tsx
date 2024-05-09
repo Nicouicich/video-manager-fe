@@ -1,35 +1,38 @@
-import { handleLogin } from '@api/login/login';
+// RegisterForm.tsx
+import { handleRegister } from '@api/register/register';
 import { useRouter } from 'next/navigation';
 import { FC, FormEvent, useState } from 'react';
 import GenericForm from '../GenericForm';
-import GoogleLoginButton from '../GoogleLoginButton/Index';
+import GoogleLoginButton from '../GoogleLoginButton';
+import EmailInput from '../Session/EmailInput'; // Asegúrate de tener este componente
 import PasswordInput from '../Session/PasswordInput';
 import UsernameInput from '../Session/UsernameInput';
-import { ILoginResponse } from '@interfaces/auth/login-response';
 
-const LoginForm: FC = () => {
+const RegisterForm: FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
   const router = useRouter();
 
-  const login = async (event: FormEvent) => {
+  const register = async (event: FormEvent) => {
     event.preventDefault();
 
     try {
-      const response: ILoginResponse = await handleLogin(username, password);
+      const response = await handleRegister(username, email, password);
       localStorage.setItem('jwt', response.token);
       router.push('/videos');
     } catch (error: any) {
-      setErrorMessage(error.message);
+      setErrorMessage(error?.message);
     }
   };
 
-  const isFormValid = username.trim() !== '' && password.trim() !== '';
+  const isFormValid = Boolean(username.trim()) && Boolean(password.trim()) && Boolean(email.trim());
 
   return (
-    <GenericForm onSubmit={login}>
+    <GenericForm onSubmit={register}>
       <UsernameInput value={username} onChange={setUsername} />
+      <EmailInput value={email} onChange={setEmail} />
       <PasswordInput value={password} onChange={setPassword} />
       {errorMessage && (
         <p className='text-red-500 mb-4 text-center'>{errorMessage}</p>
@@ -39,11 +42,11 @@ const LoginForm: FC = () => {
         disabled={!isFormValid}
         className={`w-full font-semibold py-2 rounded-lg focus:outline-none focus:shadow-outline ${!isFormValid ?
           'bg-blue-200 text-gray-600' : 'bg-blue-500 text-white'}`}>
-        Log in
+        Register
       </button>
       <GoogleLoginButton />
     </GenericForm>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

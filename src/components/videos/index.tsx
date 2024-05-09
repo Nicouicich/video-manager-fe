@@ -133,4 +133,4 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
   );
 };
 
-export default SmallVideo;
+export { SmallVideo };

@@ -1,6 +1,6 @@
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import Login from "./Index";
+import Login from "./";
 
 export function LoginComponent() {
   const params = useSearchParams().get('token');

@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
 import UploadButton from '@components/Upload/VideoUploadButton';
-import Navbar from '@components/Navbar/Index';
+import Navbar from '@components/Navbar';
 
 const AdminPage: React.FC = () => {
   const router = useRouter();

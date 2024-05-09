@@ -1,8 +1,8 @@
 'use client';
 
 import { getAllVideos } from '@api/videos/videos';
-import Navbar from '@components/Navbar/Index';
-import SmallVideo from '@components/videos/SmallVideo';
+import Navbar from '@components/Navbar';
+import { SmallVideo } from '@components/videos';
 import { IVideo } from '@interfaces/videos/video';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

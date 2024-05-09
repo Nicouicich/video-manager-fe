@@ -1,6 +1,6 @@
 'use client';
 
-import LoginForm from "../LoginForm/Index";
+import LoginForm from "../LoginForm";
 
 export default function Login() {
   return (
