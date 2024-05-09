@@ -1,7 +1,7 @@
 import { IVideo } from "@interfaces/videos/video";
 
 export async function getVideoById(id: string, token: string): Promise<IVideo | null> {
-    const response = await fetch(`http://localhost:3000/api/video/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/video/${id}`, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -15,7 +15,7 @@ export async function getVideoById(id: string, token: string): Promise<IVideo | 
 }
 
 export async function deleteVideoById(id: string, token: string): Promise<boolean> {
-    const response = await fetch(`http://localhost:3000/api/video/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/video/${id}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`

@@ -1,7 +1,7 @@
 import { ILoginResponse } from "@interfaces/auth/login-response";
 
 export async function handleRegister(username: string, email: string, password: string): Promise<ILoginResponse> {
-  const response: Response = await fetch('http://localhost:3000/api/auth/register', {
+  const response: Response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
