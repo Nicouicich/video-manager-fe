@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import ProfileIcon from "../ProfileIcon";
 import { MenuItem } from "./MenuItem";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "cookies-next";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
