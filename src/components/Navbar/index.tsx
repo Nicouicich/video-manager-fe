@@ -4,10 +4,13 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import ProfileIcon from "../ProfileIcon";
 import { MenuItem } from "./MenuItem";
+import { useRouter } from "next/navigation";
+import { deleteCookie } from "cookies-next";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,6 +27,11 @@ const Navbar: React.FC = () => {
 
     getUserToken();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    router.push("/");
+  };
 
   return (
     <nav className="flex justify-between items-center p-4 bg-gray-100 text-gray-800 shadow-md relative">
@@ -45,6 +53,9 @@ const Navbar: React.FC = () => {
           <div className="bg-blue-200 absolute left-0 top-full w-64 mt-2 rounded-md shadow-lg">
             <MenuItem href="/videos">Videos</MenuItem>
             {isAdmin && <MenuItem href="/admin">Admin panel</MenuItem>}
+            <MenuItem onLogout={handleLogout} href="/">
+              Logout
+            </MenuItem>
           </div>
         )}
       </div>
