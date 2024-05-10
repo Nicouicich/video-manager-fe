@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { getAllVideos } from '@api/videos/videos';
-import Navbar from '@components/Navbar';
-import { SmallVideo } from '@components/videos';
-import { IVideo } from '@interfaces/videos/video';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { getAllVideos } from "@api/videos/videos";
+import Navbar from "@components/Navbar";
+import { SmallVideo } from "@components/videos";
+import { IVideo } from "@interfaces/videos/video";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function VideosPage() {
   const [videos, setVideos] = useState<IVideo[]>([]);
@@ -13,12 +13,12 @@ export default function VideosPage() {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const token = localStorage.getItem('jwt');
+      const token = localStorage.getItem("jwt");
       if (token) {
         const videos: IVideo[] = await getAllVideos(token);
         setVideos(videos);
       } else {
-        router.push('/');
+        router.push("/");
       }
     };
 

@@ -1,24 +1,24 @@
 // pages/AdminPage.tsx
-'use client';
-import React, { useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import Head from 'next/head';
-import { useRouter } from 'next/navigation';
-import UploadButton from '@components/Upload/VideoUploadButton';
-import Navbar from '@components/Navbar';
+"use client";
+import React, { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import Head from "next/head";
+import { useRouter } from "next/navigation";
+import UploadButton from "@components/Upload/VideoUploadButton";
+import Navbar from "@components/Navbar";
 
 const AdminPage: React.FC = () => {
   const router = useRouter();
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
+    const jwt = localStorage.getItem("jwt");
     if (jwt) {
       const decodedJwt: any = jwtDecode(jwt);
       const isAdmin = decodedJwt.admin;
       if (!isAdmin) {
-        router.push('/');
+        router.push("/");
       }
     } else {
-      router.push('/');
+      router.push("/");
     }
   }, []);
 

@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import Login from "./";
 
 export function LoginComponent() {
-  const params = useSearchParams().get('token');
+  const params = useSearchParams().get("token");
   useEffect(() => {
     if (params) {
-      localStorage.setItem('jwt', params);
-      redirect('/videos');
+      localStorage.setItem("jwt", params);
+      redirect("/videos");
     }
   }, [params]);
 

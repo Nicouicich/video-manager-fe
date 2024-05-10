@@ -1,5 +1,5 @@
 // GenericForm.tsx
-import { FC, ReactNode, FormEvent } from 'react';
+import { FC, ReactNode, FormEvent } from "react";
 
 interface GenericFormProps {
   onSubmit: (event: FormEvent) => void;
@@ -7,11 +7,7 @@ interface GenericFormProps {
 }
 
 const GenericForm: FC<GenericFormProps> = ({ onSubmit, children }) => {
-  return (
-    <form onSubmit={onSubmit}>
-      {children}
-    </form>
-  );
+  return <form onSubmit={onSubmit}>{children}</form>;
 };
 
 export default GenericForm;

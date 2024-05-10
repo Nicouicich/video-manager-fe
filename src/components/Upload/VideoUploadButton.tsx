@@ -1,7 +1,7 @@
 // components/UploadButton.tsx
-'use client';
-import { uploadVideo } from '@api/videos/videos';
-import React, { useRef } from 'react';
+"use client";
+import { uploadVideo } from "@api/videos/videos";
+import React, { useRef } from "react";
 
 const UploadButton: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -13,11 +13,10 @@ const UploadButton: React.FC = () => {
   const handleFileChange = () => {
     if (fileInputRef.current?.files?.length) {
       const filesArray = Array.from(fileInputRef.current.files);
-      const jwt = localStorage.getItem('jwt'); 
+      const jwt = localStorage.getItem("jwt");
       uploadVideo(filesArray, jwt);
     }
   };
-
   return (
     <div>
       <input
@@ -25,14 +24,14 @@ const UploadButton: React.FC = () => {
         accept="video/*"
         multiple
         ref={fileInputRef}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleFileChange}
       />
       <button
         onClick={handleButtonClick}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded opacity-80 hover:opacity-100 transition-opacity duration-300"
       >
-        Subir Video
+        Upload Video
       </button>
     </div>
   );
