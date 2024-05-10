@@ -9,23 +9,19 @@ import { IUserAuth } from "@interfaces/auth/auth-user";
 
 interface SmallVideoProps {
   video: IVideo;
+  onVideoChange: () => void; // Añade esta línea
 }
 
-const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
-  const [isHovered, setIsHovered] = useState(false);
+const SmallVideo: React.FC<SmallVideoProps> = ({
+  video,
+  onVideoChange,
+}: SmallVideoProps) => {
   const router = useRouter();
   const jwt = localStorage.getItem("jwt");
   const user: IUserAuth = jwtDecode(jwt as string);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-
-  const handleHover = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+  const [popupCallback, setPopupCallback] = useState<(() => void) | null>(null);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
@@ -39,6 +35,7 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
     const isDeleted = await deleteVideoById(video.id, jwt as string);
     if (isDeleted) {
       setPopupMessage("Video deleted successfully");
+      setPopupCallback(() => onVideoChange); // Cambio aquí
     } else {
       setPopupMessage("Failed to delete video");
     }
@@ -47,6 +44,7 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
 
   const handleRename = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
+    setPopupCallback(() => onVideoChange); // Cambio aquí
   };
 
   const timeSinceCreation = () => {
@@ -72,15 +70,12 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
   return (
     <div className="border border-gray-300 rounded-lg overflow-hidden shadow-md mb-5 w-1/4 mx-2 relative bg-white">
       <div onClick={handleClick} className="cursor-pointer">
-        <video
-          src={video.url}
-          className="w-full h-auto rounded-lg"
-          onMouseEnter={handleHover}
-          onMouseLeave={handleMouseLeave}
-        />
+        <video src={video.url} className="w-full h-auto rounded-lg" />
       </div>
       <div className="p-3">
-        <p className="font-semibold text-sm text-gray-800 truncate">{video.title.substring(0, 50)}</p>
+        <p className="font-semibold text-sm text-gray-800 truncate">
+          {video.title.substring(0, 50)}
+        </p>
         <p className="text-xs text-gray-600">
           Posted by{" "}
           <Link
@@ -130,7 +125,12 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
             <p className="text-center">{popupMessage}</p>
             <button
               className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none"
-              onClick={() => setShowPopup(false)}
+              onClick={() => {
+                setShowPopup(false);
+                if (popupCallback) {
+                  popupCallback(); // Llama a la función de callback aquí
+                }
+              }}
             >
               Close
             </button>
@@ -139,9 +139,6 @@ const SmallVideo: React.FC<SmallVideoProps> = ({ video }: SmallVideoProps) => {
       )}
     </div>
   );
-
-
-
 };
 
 export { SmallVideo };

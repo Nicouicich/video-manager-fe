@@ -2,6 +2,7 @@
 import { getVideoById } from "@api/videos/[id]/video";
 import Navbar from "@components/Navbar";
 import { IVideo } from "@interfaces/videos/video";
+import { validateToken } from "@utils/utils";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -13,7 +14,7 @@ export default function VideosPage({ params }: any) {
     const fetchVideo = async () => {
       const token = localStorage.getItem("jwt");
 
-      if (token) {
+      if (token && validateToken(token))  {
         const video2 = await getVideoById(params.id, token);
         setVideo(video2);
       } else {

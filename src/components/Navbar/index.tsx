@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import ProfileIcon from '../ProfileIcon';
-import { jwtDecode } from 'jwt-decode';
-import Link from 'next/link';
-import { MenuItem } from './MenuItem';
+import { validateToken } from "@utils/utils";
+import { jwtDecode } from "jwt-decode";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import ProfileIcon from "../ProfileIcon";
+import { MenuItem } from "./MenuItem";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,8 +15,8 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const getUserToken = async () => {
-      const token = localStorage.getItem('jwt');
-      if (token) {
+      const token = localStorage.getItem("jwt");
+      if (token && validateToken(token)) {
         const decodedToken: any = jwtDecode(token);
         setIsAdmin(decodedToken.admin);
       }
@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
           <span className="sr-only">Toggle Menu</span>
           <div className="w-10 h-10 relative">
             <Image
-              src={isOpen ? '/hamburguer-open.png' : '/hamburguer-closed.png'}
+              src={isOpen ? "/hamburguer-open.png" : "/hamburguer-closed.png"}
               alt="Menu"
               layout="fill"
               objectFit="contain"
@@ -53,8 +53,6 @@ const Navbar: React.FC = () => {
       </div>
     </nav>
   );
-
 };
-
 
 export default Navbar;

@@ -1,5 +1,6 @@
 "use client";
 
+import { validateToken } from "@utils/utils";
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +13,7 @@ const ProfileIcon: React.FC = () => {
   useEffect(() => {
     const getUsertoken = async () => {
       const token = localStorage.getItem("jwt");
-      if (token) {
+      if (token && validateToken(token))  {
         const decodeken: any = jwtDecode(token);
         setUserId(decodeken._id);
         const img = decodeken.imageUrl ? decodeken.imageUrl : imageUrl;
