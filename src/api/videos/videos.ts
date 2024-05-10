@@ -18,7 +18,6 @@ export async function uploadVideo(files: File[], jwt: string | null) {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API}/video`, {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${jwt}`,
         },
         body: formData,
